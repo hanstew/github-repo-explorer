@@ -1,6 +1,17 @@
 # Changelog
 
-## [Unreleased]
+## [0.2.0] - 2026-11-22
+
+### Added
+- Added a web interface for browsing a GitHub organisation’s repositories.
+  Users can filter by language, archive status, and minimum stars, sort by
+  name, stars, or last update, and page through the results.
+
+### Fixed
+- Fixed a `KeyError` when sorting repositories by stars.
+
+
+## [0.1.0]
 
 ### Added
 

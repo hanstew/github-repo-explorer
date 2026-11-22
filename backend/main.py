@@ -14,6 +14,11 @@ app = FastAPI(
 )
 
 
+@app.get("/health")
+def health_check():
+    return {"status": "healthy"}
+
+
 @app.get("/api/orgs/{org}/repos")
 def get_repos(
     org: str,
@@ -122,7 +127,7 @@ def sort_repos(
     Return a sorted copy without changing the cached repository list.
     """
     sort_keys = {
-        "stargazers_count": lambda repo: repo["stargazers_count"],
+        "stars": lambda repo: repo["stars"],
         "updated_at": lambda repo: repo["updated_at"],
         "name": lambda repo: repo["name"].lower(),
     }
