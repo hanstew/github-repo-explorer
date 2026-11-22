@@ -1,5 +1,8 @@
 # Changelog
 
+## [0.2.1] - 2026-11-22
+- Fixed an error that caused repository searches to return `500 Internal Server Error` when GitHub was unreachable. The API now returns `502 Bad Gateway` with the message “Could not reach GitHub.”
+
 ## [0.2.0] - 2026-11-22
 
 ### Added

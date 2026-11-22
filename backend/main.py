@@ -10,7 +10,7 @@ logging.basicConfig(level=logging.INFO)
 app = FastAPI(
     title="GitHub Repository Explorer",
     description="A simple API to explore GitHub repositories",
-    version="0.1.0",
+    version="0.2.1",
 )
 
 
@@ -63,7 +63,7 @@ def get_repos(
     except httpx.RequestError as exc:
         logger.warning("Could not reach GitHub for org=%s: %s", org, type(exc).__name__)
         raise HTTPException(
-            status_code=status_code, detail="Could not reach GitHub."
+            status_code=502, detail="Could not reach GitHub."
         ) from exc
 
     # Gather list of available languages
