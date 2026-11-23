@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.0.0] - 2026-11-23
+
+First stable release of GitHub Repository Explorer.
+
+### Added
+- Backend logs now saved to `backend/logs/backend.log` and rotated automatically.
+
+### Changed
+- Updated browser tab title to “GitHub Repository Explorer”.
+- Expanded README with setup instructions, testing guidance, design decisions, trade-offs and planned improvements.
+
 ## [0.2.1] - 2026-11-22
 - Fixed an error that caused repository searches to return `500 Internal Server Error` when GitHub was unreachable. The API now returns `502 Bad Gateway` with the message “Could not reach GitHub.”
 

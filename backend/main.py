@@ -32,7 +32,7 @@ logger.info("GitHub token configured: %s", "true" if token else "false")
 app = FastAPI(
     title="GitHub Repository Explorer",
     description="A simple API to explore GitHub repositories",
-    version="0.2.1",
+    version="1.0.0",
 )
 
 
