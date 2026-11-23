@@ -3,9 +3,31 @@ from github_client import fetch_repos
 import httpx
 from typing import Literal
 import logging
+from logging.handlers import RotatingFileHandler
+from pathlib import Path
+import os
+
+log_dir = Path(__file__).resolve().parent / "logs"
+log_dir.mkdir(exist_ok=True)
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s %(levelname)s %(name)s %(message)s",
+    handlers=[
+        logging.StreamHandler(),
+        RotatingFileHandler(
+            log_dir / "backend.log",
+            maxBytes=5_000_000,
+            backupCount=5,
+            encoding="utf-8",
+        ),
+    ],
+)
 
 logger = logging.getLogger(__name__)
-logging.basicConfig(level=logging.INFO)
+
+token = os.getenv("GITHUB_TOKEN", "").strip()
+logger.info("GitHub token configured: %s", "true" if token else "false")
 
 app = FastAPI(
     title="GitHub Repository Explorer",
@@ -62,9 +84,7 @@ def get_repos(
 
     except httpx.RequestError as exc:
         logger.warning("Could not reach GitHub for org=%s: %s", org, type(exc).__name__)
-        raise HTTPException(
-            status_code=502, detail="Could not reach GitHub."
-        ) from exc
+        raise HTTPException(status_code=502, detail="Could not reach GitHub.") from exc
 
     # Gather list of available languages
     available_languages = sorted(

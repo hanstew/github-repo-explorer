@@ -1,6 +1,9 @@
 import httpx
 from cachetools.func import ttl_cache
 import os
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 @ttl_cache(maxsize=16, ttl=1200)
@@ -40,6 +43,6 @@ def fetch_repos(
 
         # Handle pagination - check if there is a next url to query next
         next_url = response.links.get("next", {}).get("url")
-        print(next_url)
 
+    logger.info("Fetched %d repositories for org=%s", len(all_repos), org)
     return all_repos
